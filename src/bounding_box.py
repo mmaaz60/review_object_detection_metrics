@@ -237,9 +237,12 @@ class BoundingBox:
         return (self._width_img, self._height_img)
 
     def get_area(self):
-        assert isclose(self._w * self._h, (self._x2 - self._x) * (self._y2 - self._y))
-        assert (self._x2 > self._x)
-        assert (self._y2 > self._y)
+        try:
+            assert isclose(self._w * self._h, (self._x2 - self._x) * (self._y2 - self._y))
+            assert (self._x2 > self._x)
+            assert (self._y2 > self._y)
+        except AssertionError:
+            return abs((self._x2 - self._x + 1) * (self._y2 - self._y + 1))
         return (self._x2 - self._x + 1) * (self._y2 - self._y + 1)
 
     def get_coordinates_type(self):

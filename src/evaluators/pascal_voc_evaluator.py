@@ -220,6 +220,9 @@ def get_pascalvoc_metrics(gt_boxes,
             'table': table
         }
     # For mAP, only the classes in the gt set should be considered
+    print("Printing stats.")
+    for k, v in ret.items():
+        print(f"{k}, AP: {v['AP']}, Precision: {v['precision'][-1]}, Recall: {v['recall'][-1]}")
     mAP = sum([v['AP'] for k, v in ret.items() if k in gt_classes_only]) / len(gt_classes_only)
     return {'per_class': ret, 'mAP': mAP}
 
